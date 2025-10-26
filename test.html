@@ -1,0 +1,1905 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NaturoVie - Votre Bien-être Naturel</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(60px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-60px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(60px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .animate-fade-in-up {
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        .animate-slide-in-left {
+            animation: slideInLeft 0.8s ease-out forwards;
+        }
+
+        .animate-slide-in-right {
+            animation: slideInRight 0.8s ease-out forwards;
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s ease-out;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .hero-parallax {
+            transition: transform 0.1s ease-out;
+        }
+
+        .card-hover {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .card-hover:hover {
+            transform: translateY(-12px) scale(1.02);
+            box-shadow: 0 25px 50px -12px rgba(16, 185, 129, 0.25);
+        }
+
+        .btn-primary {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .btn-primary:hover::before {
+            left: 100%;
+        }
+
+        .btn-primary:hover {
+            transform: scale(1.05);
+            box-shadow: 0 20px 40px -10px rgba(16, 185, 129, 0.4);
+        }
+
+        .slide {
+            display: none;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        .slide.active {
+            display: block;
+        }
+
+        .nav-link {
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -8px;
+            left: 50%;
+            background: linear-gradient(90deg, #10B981, #059669);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .gradient-overlay {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(250, 245, 228, 0.2));
+        }
+
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: #10B981;
+            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .testimonial-slide {
+            display: none;
+            animation: fadeIn 0.8s ease-in-out;
+        }
+
+        .testimonial-slide.active {
+            display: flex;
+        }
+
+        .stat-number {
+            background: linear-gradient(135deg, #10B981, #059669);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-text {
+            text-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            .card-hover:hover {
+                transform: translateY(-8px);
+            }
+        }
+    </style>
+</head>
+<body class="bg-white text-gray-800">
+
+    <!-- Header Navigation -->
+    <header class="fixed w-full top-0 z-50 bg-white/95 backdrop-blur-sm shadow-sm transition-all duration-300" id="header">
+        <nav class="container mx-auto px-6 lg:px-12 py-5">
+            <div class="flex justify-between items-center">
+                <!-- Logo -->
+                <div class="flex items-center space-x-3 group cursor-pointer">
+                    <div class="w-12 h-12 bg-gradient-to-br from-emerald-400 to-emerald-600 rounded-2xl flex items-center justify-center transform group-hover:rotate-12 transition-transform duration-300">
+                        <i class="fas fa-leaf text-white text-xl"></i>
+                    </div>
+                    <span class="text-2xl font-bold bg-gradient-to-r from-emerald-600 to-emerald-500 bg-clip-text text-transparent">NaturoVie</span>
+                </div>
+
+                <!-- Desktop Menu -->
+                <div class="hidden lg:flex items-center space-x-10">
+                    <a href="#accueil" class="nav-link text-gray-700 hover:text-emerald-600 font-medium">Accueil</a>
+                    <a href="#apropos" class="nav-link text-gray-700 hover:text-emerald-600 font-medium">À propos</a>
+                    <a href="#services" class="nav-link text-gray-700 hover:text-emerald-600 font-medium">Services</a>
+                    <a href="#temoignages" class="nav-link text-gray-700 hover:text-emerald-600 font-medium">Témoignages</a>
+                    <a href="#blog" class="nav-link text-gray-700 hover:text-emerald-600 font-medium">Blog</a>
+                    <a href="#contact" class="btn-primary bg-gradient-to-r from-emerald-500 to-emerald-600 text-white px-8 py-3 rounded-full font-semibold shadow-lg">
+                        Réserver
+                    </a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button class="lg:hidden text-gray-700 focus:outline-none" id="menuBtn">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+
+            <!-- Mobile Menu -->
+            <div class="hidden lg:hidden mt-6 pb-6 space-y-4" id="mobileMenu">
+                <a href="#accueil" class="block text-gray-700 hover:text-emerald-600 font-medium py-2">Accueil</a>
+                <a href="#apropos" class="block text-gray-700 hover:text-emerald-600 font-medium py-2">À propos</a>
+                <a href="#services" class="block text-gray-700 hover:text-emerald-600 font-medium py-2">Services</a>
+                <a href="#temoignages" class="block text-gray-700 hover:text-emerald-600 font-medium py-2">Témoignages</a>
+                <a href="#blog" class="block text-gray-700 hover:text-emerald-600 font-medium py-2">Blog</a>
+                <a href="#contact" class="block bg-gradient-to-r from-emerald-500 to-emerald-600 text-white px-6 py-3 rounded-full font-semibold text-center shadow-lg mt-4">Réserver</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section with Slider -->
+    <section id="accueil" class="relative pt-20 overflow-hidden">
+        <div class="h-screen relative">
+            <!-- Slide 1 -->
+            <div class="slide active absolute inset-0">
+                <div class="absolute inset-0 bg-cover bg-center hero-parallax" style="background-image: url('https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=1920&q=80');" data-speed="0.5"></div>
+                <div class="absolute inset-0 bg-gradient-to-r from-black/50 via-black/30 to-transparent"></div>
+                <div class="relative h-full flex items-center">
+                    <div class="container mx-auto px-6 lg:px-12">
+                        <div class="max-w-3xl space-y-8">
+                            <h1 class="text-5xl lg:text-7xl font-bold text-white leading-tight hero-text animate-fade-in-up">
+                                Retrouvez votre équilibre naturel
+                            </h1>
+                            <p class="text-xl lg:text-2xl text-white/95 font-light animate-fade-in-up" style="animation-delay: 0.2s; opacity: 0; animation-fill-mode: forwards;">
+                                Un accompagnement personnalisé pour votre santé et votre bien-être
+                            </p>
+                            <div class="flex flex-col sm:flex-row gap-4 animate-fade-in-up" style="animation-delay: 0.4s; opacity: 0; animation-fill-mode: forwards;">
+                                <a href="#contact" class="btn-primary bg-gradient-to-r from-emerald-500 to-emerald-600 text-white px-10 py-4 rounded-full font-semibold text-lg shadow-2xl inline-block text-center">
+                                    Réservez votre consultation
+                                </a>
+                                <a href="#services" class="bg-white/20 backdrop-blur-sm text-white px-10 py-4 rounded-full font-semibold text-lg hover:bg-white/30 transition inline-block text-center border-2 border-white/40">
+                                    Découvrir
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 2 -->
+            <div class="slide absolute inset-0">
+                <div class="absolute inset-0 bg-cover bg-center hero-parallax" style="background-image: url('https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=1920&q=80');" data-speed="0.5"></div>
+                <div class="absolute inset-0 bg-gradient-to-r from-emerald-900/60 via-emerald-800/40 to-transparent"></div>
+                <div class="relative h-full flex items-center">
+                    <div class="container mx-auto px-6 lg:px-12">
+                        <div class="max-w-3xl space-y-8">
+                            <h1 class="text-5xl lg:text-7xl font-bold text-white leading-tight hero-text">
+                                Nutrition & Vitalité
+                            </h1>
+                            <p class="text-xl lg:text-2xl text-white/95 font-light">
+                                Des solutions naturelles adaptées à vos besoins uniques
+                            </p>
+                            <a href="#services" class="btn-primary bg-gradient-to-r from-emerald-500 to-emerald-600 text-white px-10 py-4 rounded-full font-semibold text-lg shadow-2xl inline-block">
+                                Découvrir nos services
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 3 -->
+            <div class="slide absolute inset-0">
+                <div class="absolute inset-0 bg-cover bg-center hero-parallax" style="background-image: url('https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=1920&q=80');" data-speed="0.5"></div>
+                <div class="absolute inset-0 bg-gradient-to-r from-black/50 via-black/30 to-transparent"></div>
+                <div class="relative h-full flex items-center">
+                    <div class="container mx-auto px-6 lg:px-12">
+                        <div class="max-w-3xl space-y-8">
+                            <h1 class="text-5xl lg:text-7xl font-bold text-white leading-tight hero-text">
+                                Harmonie Corps-Esprit
+                            </h1>
+                            <p class="text-xl lg:text-2xl text-white/95 font-light">
+                                Une approche holistique pour une santé durable
+                            </p>
+                            <a href="#apropos" class="btn-primary bg-gradient-to-r from-emerald-500 to-emerald-600 text-white px-10 py-4 rounded-full font-semibold text-lg shadow-2xl inline-block">
+                                En savoir plus
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slider Controls -->
+            <button class="absolute left-6 top-1/2 -translate-y-1/2 w-14 h-14 bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white rounded-full transition-all duration-300 hover:scale-110 hidden md:flex items-center justify-center" onclick="changeSlide(-1)">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <button class="absolute right-6 top-1/2 -translate-y-1/2 w-14 h-14 bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white rounded-full transition-all duration-300 hover:scale-110 hidden md:flex items-center justify-center" onclick="changeSlide(1)">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+
+            <!-- Slider Dots -->
+            <div class="absolute bottom-10 left-1/2 -translate-x-1/2 flex gap-3">
+                <button class="dot w-3 h-3 bg-white rounded-full transition-all duration-300 hover:scale-125" onclick="currentSlide(0)"></button>
+                <button class="dot w-3 h-3 bg-white/50 rounded-full transition-all duration-300 hover:scale-125" onclick="currentSlide(1)"></button>
+                <button class="dot w-3 h-3 bg-white/50 rounded-full transition-all duration-300 hover:scale-125" onclick="currentSlide(2)"></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- À propos Section -->
+    <section id="apropos" class="py-32 bg-gradient-to-b from-white via-[#FAF5E4]/30 to-white relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-96 h-96 bg-emerald-100 rounded-full filter blur-3xl opacity-20"></div>
+        <div class="container mx-auto px-6 lg:px-12 relative">
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <div class="reveal">
+                    <div class="relative">
+                        <div class="absolute -top-6 -left-6 w-64 h-64 bg-emerald-200 rounded-full filter blur-3xl opacity-30"></div>
+                        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=800&q=80" alt="Sophie Martin" class="relative rounded-3xl shadow-2xl w-full object-cover aspect-square">
+                        <div class="absolute -bottom-8 -right-8 bg-white rounded-2xl p-6 shadow-xl">
+                            <div class="flex items-center gap-3">
+                                <div class="w-12 h-12 bg-gradient-to-br from-emerald-400 to-emerald-600 rounded-xl flex items-center justify-center">
+                                    <i class="fas fa-certificate text-white text-xl"></i>
+                                </div>
+                                <div>
+                                    <div class="text-2xl font-bold text-emerald-600">Certifiée</div>
+                                    <div class="text-sm text-gray-600">FENA</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="reveal space-y-8">
+                    <div>
+                        <div class="inline-block bg-emerald-100 text-emerald-700 px-4 py-2 rounded-full text-sm font-semibold mb-6">
+                            À PROPOS
+                        </div>
+                        <h2 class="text-5xl lg:text-6xl font-bold text-gray-900 mb-6 leading-tight">
+                            Votre partenaire <span class="bg-gradient-to-r from-emerald-600 to-emerald-500 bg-clip-text text-transparent">bien-être</span>
+                        </h2>
+                    </div>
+
+                    <p class="text-xl text-gray-600 leading-relaxed">
+                        Je suis <strong class="text-gray-900">Sophie Martin</strong>, naturopathe certifiée passionnée par les médecines naturelles. Mon approche personnalisée combine nutrition, phytothérapie et techniques holistiques pour vous accompagner vers une santé optimale.
+                    </p>
+
+                    <div class="grid grid-cols-3 gap-6">
+                        <div class="text-center p-6 bg-white rounded-2xl shadow-lg card-hover">
+                            <div class="text-5xl font-bold stat-number mb-2">10+</div>
+                            <div class="text-gray-600 font-medium">Années</div>
+                        </div>
+                        <div class="text-center p-6 bg-white rounded-2xl shadow-lg card-hover">
+                            <div class="text-5xl font-bold stat-number mb-2">500+</div>
+                            <div class="text-gray-600 font-medium">Clients</div>
+                        </div>
+                        <div class="text-center p-6 bg-white rounded-2xl shadow-lg card-hover">
+                            <div class="text-5xl font-bold stat-number mb-2">98%</div>
+                            <div class="text-gray-600 font-medium">Satisfaction</div>
+                        </div>
+                    </div>
+
+                    <a href="#contact" class="btn-primary inline-block bg-gradient-to-r from-emerald-500 to-emerald-600 text-white px-8 py-4 rounded-full font-semibold shadow-lg">
+                        Prendre rendez-vous
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-32 bg-white relative">
+        <div class="container mx-auto px-6 lg:px-12">
+            <div class="text-center mb-20 reveal">
+                <div class="inline-block bg-emerald-100 text-emerald-700 px-4 py-2 rounded-full text-sm font-semibold mb-6">
+                    NOS SERVICES
+                </div>
+                <h2 class="text-5xl lg:text-6xl font-bold text-gray-900 mb-6">
+                    Solutions <span class="bg-gradient-to-r from-emerald-600 to-emerald-500 bg-clip-text text-transparent">naturelles</span>
+                </h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+                    Des accompagnements personnalisés pour votre bien-être global
+                </p>
+            </div>
+
+            <!-- Main Services -->
+            <div class="grid lg:grid-cols-3 gap-8 mb-16">
+                <!-- Service 1 -->
+                <div class="reveal bg-white border border-gray-100 rounded-3xl p-10 card-hover shadow-lg">
+                    <div class="w-16 h-16 bg-gradient-to-br from-emerald-400 to-emerald-600 rounded-2xl flex items-center justify-center mb-8 transform hover:rotate-12 transition-transform">
+                        <i class="fas fa-user-md text-3xl text-white"></i>
+                    </div>
+                    <h3 class="text-3xl font-bold text-gray-900 mb-4">Consultation</h3>
+                    <p class="text-gray-600 mb-6 leading-relaxed">
+                        Bilan complet personnalisé avec programme adapté à vos objectifs de santé
+                    </p>
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-center text-gray-700">
+                            <i class="fas fa-check-circle text-emerald-500 mr-3"></i>
+                            Durée : 1h30
+                        </li>
+                        <li class="flex items-center text-gray-700">
+                            <i class="fas fa-check-circle text-emerald-500 mr-3"></i>
+                            Bilan naturopathique
+                        </li>
+                        <li class="flex items-center text-gray-700">
+                            <i class="fas fa-check-circle text-emerald-500 mr-3"></i>
+                            Programme sur mesure
+                        </li>
+                    </ul>
+                    <div class="text-4xl font-bold text-emerald-600 mb-6">75€</div>
+                    <a href="#contact" class="btn-primary block text-center bg-gradient-to-r from-emerald-500 to-emerald-600 text-white py-4 rounded-full font-semibold shadow-lg">
+                        Réserver
+                    </a>
+                </div>
+
+                <!-- Service 2 - Featured -->
+                <div class="reveal bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-3xl p-10 card-hover shadow-2xl transform lg:scale-105 text-white relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-40 h-40 bg-white/10 rounded-full -mr-20 -mt-20"></div>
+                    <div class="absolute bottom-0 left-0 w-32 h-32 bg-white/10 rounded-full -ml-16 -mb-16"></div>
+                    <div class="relative">
+                        <div class="inline-block bg-white/20 text-white px-4 py-1 rounded-full text-sm font-semibold mb-6">
+                            POPULAIRE
+                        </div>
+                        <div class="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center mb-8">
+                            <i class="fas fa-apple-alt text-3xl"></i>
+                        </div>
+                        <h3 class="text-3xl font-bold mb-4">Programme Nutrition</h3>
+                        <p class="mb-6 leading-relaxed opacity-95">
+                            Rééquilibrage complet avec suivi mensuel personnalisé
+                        </p>
+                        <ul class="space-y-3 mb-8">
+                            <li class="flex items-center">
+                                <i class="fas fa-check-circle mr-3"></i>
+                                3 consultations / mois
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check-circle mr-3"></i>
+                                Plan alimentaire
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check-circle mr-3"></i>
+                                Recettes & conseils
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check-circle mr-3"></i>
+                                Suivi WhatsApp
+                            </li>
+                        </ul>
+                        <div class="text-4xl font-bold mb-6">180€<span class="text-lg font-normal">/mois</span></div>
+                        <a href="#contact" class="block text-center bg-white text-emerald-600 py-4 rounded-full font-semibold hover:bg-gray-50 transition shadow-lg">
+                            Commencer
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Service 3 -->
+                <div class="reveal bg-white border border-gray-100 rounded-3xl p-10 card-hover shadow-lg">
+                    <div class="w-16 h-16 bg-gradient-to-br from-emerald-400 to-emerald-600 rounded-2xl flex items-center justify-center mb-8 transform hover:rotate-12 transition-transform">
+                        <i class="fas fa-seedling text-3xl text-white"></i>
+                    </div>
+                    <h3 class="text-3xl font-bold text-gray-900 mb-4">Phytothérapie</h3>
+                    <p class="text-gray-600 mb-6 leading-relaxed">
+                        Conseils en plantes médicinales pour soutenir votre vitalité naturellement
+                    </p>
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-center text-gray-700">
+                            <i class="fas fa-check-circle text-emerald-500 mr-3"></i>
+                            Durée : 1h
+                        </li>
+                        <li class="flex items-center text-gray-700">
+                            <i class="fas fa-check-circle text-emerald-500 mr-3"></i>
+                            Recommandations ciblées
+                        </li>
+                        <li class="flex items-center text-gray-700">
+                            <i class="fas fa-check-circle text-emerald-500 mr-3"></i>
+                            Produits naturels
+                        </li>
+                    </ul>
+                    <div class="text-4xl font-bold text-emerald-600 mb-6">60€</div>
+                    <a href="#contact" class="btn-primary block text-center bg-gradient-to-r from-emerald-500 to-emerald-600 text-white py-4 rounded-full font-semibold shadow-lg">
+                        Réserver
+                    </a>
+                </div>
+            </div>
+
+            <!-- Additional Services -->
+            <!-- Services secondaires / Compléments -->
+<div class="grid md:grid-cols-4 gap-6 reveal">
+
+    <!-- Gestion du Stress -->
+    <div class="text-center p-8 bg-[#FAF5E4] rounded-2xl card-hover">
+        <div class="w-16 h-16 bg-white rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-md">
+            <i class="fas fa-spa text-3xl text-emerald-600"></i>
+        </div>
+        <h4 class="font-bold text-gray-900 mb-2 text-lg">Gestion du Stress</h4>
+        <p class="text-sm text-gray-600">Relaxation & équilibre</p>
+    </div>
+
+    <!-- Bilan de Vitalité -->
+    <div class="text-center p-8 bg-[#FAF5E4] rounded-2xl card-hover">
+        <div class="w-16 h-16 bg-white rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-md">
+            <i class="fas fa-heartbeat text-3xl text-emerald-600"></i>
+        </div>
+        <h4 class="font-bold text-gray-900 mb-2 text-lg">Bilan de Vitalité</h4>
+        <p class="text-sm text-gray-600">Évaluation complète</p>
+    </div>
+
+    <!-- Femme & Enfant -->
+    <div class="text-center p-8 bg-[#FAF5E4] rounded-2xl card-hover">
+        <div class="w-16 h-16 bg-white rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-md">
+            <i class="fas fa-baby text-3xl text-emerald-600"></i>
+        </div>
+        <h4 class="font-bold text-gray-900 mb-2 text-lg">Femme & Enfant</h4>
+        <p class="text-sm text-gray-600">Accompagnement dédié</p>
+    </div>
+
+    <!-- Ateliers Collectifs -->
+    <div class="text-center p-8 bg-[#FAF5E4] rounded-2xl card-hover">
+        <div class="w-16 h-16 bg-white rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-md">
+            <i class="fas fa-users text-3xl text-emerald-600"></i>
+        </div>
+        <h4 class="font-bold text-gray-900 mb-2 text-lg">Ateliers Collectifs</h4>
+        <p class="text-sm text-gray-600">Formation & prévention</p>
+    </div>
+
+</div>
+
+        </div>
+    </section>
+
+
+
+    <!-- Témoignages Section -->
+    <section id="temoignages" class="py-32 bg-gradient-to-b from-[#FAF5E4]/50 to-white relative overflow-hidden">
+        <div class="absolute top-0 left-0 w-96 h-96 bg-emerald-100 rounded-full filter blur-3xl opacity-20"></div>
+        <div class="container mx-auto px-6 lg:px-12 relative">
+            <div class="text-center mb-20 reveal">
+                <div class="inline-block bg-emerald-100 text-emerald-700 px-4 py-2 rounded-full text-sm font-semibold mb-6">
+                    TÉMOIGNAGES
+                </div>
+                <h2 class="text-5xl lg:text-6xl font-bold text-gray-900 mb-6">
+                    Ils nous font <span class="bg-gradient-to-r from-emerald-600 to-emerald-500 bg-clip-text text-transparent">confiance</span>
+                </h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+                    Découvrez les expériences authentiques de nos clients
+                </p>
+            </div>
+
+            <div class="max-w-5xl mx-auto relative">
+                <!-- Testimonial Slide 1 -->
+                <div class="testimonial-slide active justify-center">
+                    <div class="bg-white rounded-3xl shadow-2xl p-12 lg:p-16 max-w-4xl mx-auto reveal">
+                        <div class="flex flex-col md:flex-row items-center gap-8 mb-8">
+                            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200&q=80" alt="Marie" class="w-24 h-24 rounded-full object-cover shadow-lg ring-4 ring-emerald-100">
+                            <div class="text-center md:text-left">
+                                <h4 class="text-2xl font-bold text-gray-900 mb-2">Marie Dupont</h4>
+                                <div class="text-yellow-400 text-xl mb-2">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <p class="text-gray-500">Cliente depuis 2 ans</p>
+                            </div>
+                        </div>
+                        <p class="text-xl text-gray-700 italic leading-relaxed">
+                            "Sophie a littéralement transformé ma vie. Grâce à son accompagnement bienveillant et ses conseils en nutrition, j'ai retrouvé mon énergie et ma joie de vivre. Une naturopathe exceptionnelle que je recommande les yeux fermés."
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Testimonial Slide 2 -->
+                <div class="testimonial-slide justify-center">
+                    <div class="bg-white rounded-3xl shadow-2xl p-12 lg:p-16 max-w-4xl mx-auto">
+                        <div class="flex flex-col md:flex-row items-center gap-8 mb-8">
+                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&q=80" alt="Thomas" class="w-24 h-24 rounded-full object-cover shadow-lg ring-4 ring-emerald-100">
+                            <div class="text-center md:text-left">
+                                <h4 class="text-2xl font-bold text-gray-900 mb-2">Thomas Bernard</h4>
+                                <div class="text-yellow-400 text-xl mb-2">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <p class="text-gray-500">Client depuis 1 an</p>
+                            </div>
+                        </div>
+                        <p class="text-xl text-gray-700 italic leading-relaxed">
+                            "Une approche professionnelle et personnalisée. Les résultats sont au rendez-vous : meilleur sommeil, digestion améliorée, et un vrai bien-être au quotidien. Merci Sophie pour votre expertise !"
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Testimonial Slide 3 -->
+                <div class="testimonial-slide justify-center">
+                    <div class="bg-white rounded-3xl shadow-2xl p-12 lg:p-16 max-w-4xl mx-auto">
+                        <div class="flex flex-col md:flex-row items-center gap-8 mb-8">
+                            <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=200&q=80" alt="Isabelle" class="w-24 h-24 rounded-full object-cover shadow-lg ring-4 ring-emerald-100">
+                            <div class="text-center md:text-left">
+                                <h4 class="text-2xl font-bold text-gray-900 mb-2">Isabelle Laurent</h4>
+                                <div class="text-yellow-400 text-xl mb-2">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <p class="text-gray-500">Cliente depuis 6 mois</p>
+                            </div>
+                        </div>
+                        <p class="text-xl text-gray-700 italic leading-relaxed">
+                            "Sophie m'a aidée à gérer mon stress et mes troubles digestifs avec des solutions naturelles. Son écoute attentive et sa disponibilité font toute la différence. Je recommande vivement !"
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Controls -->
+                <button class="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 lg:-translate-x-20 w-14 h-14 bg-white hover:bg-emerald-50 text-emerald-600 rounded-full shadow-xl transition-all duration-300 hover:scale-110 flex items-center justify-center" onclick="changeTestimonial(-1)">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 lg:translate-x-20 w-14 h-14 bg-white hover:bg-emerald-50 text-emerald-600 rounded-full shadow-xl transition-all duration-300 hover:scale-110 flex items-center justify-center" onclick="changeTestimonial(1)">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+
+                <!-- Dots -->
+                <div class="flex justify-center gap-3 mt-12">
+                    <button class="testimonial-dot w-3 h-3 bg-emerald-600 rounded-full transition-all duration-300 hover:scale-125" onclick="currentTestimonial(0)"></button>
+                    <button class="testimonial-dot w-3 h-3 bg-gray-300 rounded-full transition-all duration-300 hover:scale-125" onclick="currentTestimonial(1)"></button>
+                    <button class="testimonial-dot w-3 h-3 bg-gray-300 rounded-full transition-all duration-300 hover:scale-125" onclick="currentTestimonial(2)"></button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Section -->
+    <section id="blog" class="py-32 bg-white">
+        <div class="container mx-auto px-6 lg:px-12">
+            <div class="text-center mb-20 reveal">
+                <div class="inline-block bg-emerald-100 text-emerald-700 px-4 py-2 rounded-full text-sm font-semibold mb-6">
+                    BLOG
+                </div>
+                <h2 class="text-5xl lg:text-6xl font-bold text-gray-900 mb-6">
+                    Conseils <span class="bg-gradient-to-r from-emerald-600 to-emerald-500 bg-clip-text text-transparent">santé</span>
+                </h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+                    Découvrez mes derniers articles pour votre bien-être
+                </p>
+            </div>
+
+            <div class="grid lg:grid-cols-3 gap-10">
+                <!-- Article 1 -->
+                <article class="reveal bg-white rounded-3xl overflow-hidden shadow-lg card-hover">
+                    <div class="relative overflow-hidden group">
+                        <img src="https://images.unsplash.com/photo-1498837167922-ddd27525d352?w=800&q=80" alt="Article" class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110">
+                        <div class="absolute top-4 left-4 bg-emerald-600 text-white px-4 py-2 rounded-full text-sm font-semibold">
+                            NUTRITION
+                        </div>
+                    </div>
+                    <div class="p-8">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-4 hover:text-emerald-600 transition">
+                            Les super-aliments du printemps
+                        </h3>
+                        <p class="text-gray-600 mb-6 leading-relaxed">
+                            Découvrez les aliments de saison qui boosteront votre vitalité et renforceront votre système immunitaire naturellement...
+                        </p>
+                        <a href="#" class="inline-flex items-center text-emerald-600 font-semibold hover:text-emerald-700 transition group">
+                            Lire l'article
+                            <i class="fas fa-arrow-right ml-2 group-hover:translate-x-2 transition-transform"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Article 2 -->
+                <article class="reveal bg-white rounded-3xl overflow-hidden shadow-lg card-hover">
+                    <div class="relative overflow-hidden group">
+                        <img src="https://images.unsplash.com/photo-1505751172876-fa1923c5c528?w=800&q=80" alt="Article" class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110">
+                        <div class="absolute top-4 left-4 bg-emerald-600 text-white px-4 py-2 rounded-full text-sm font-semibold">
+                            BIEN-ÊTRE
+                        </div>
+                    </div>
+                    <div class="p-8">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-4 hover:text-emerald-600 transition">
+                            5 techniques pour gérer le stress
+                        </h3>
+                        <p class="text-gray-600 mb-6 leading-relaxed">
+                            Des méthodes naturelles et efficaces pour retrouver votre sérénité au quotidien et améliorer la qualité de votre sommeil...
+                        </p>
+                        <a href="#" class="inline-flex items-center text-emerald-600 font-semibold hover:text-emerald-700 transition group">
+                            Lire l'article
+                            <i class="fas fa-arrow-right ml-2 group-hover:translate-x-2 transition-transform"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Article 3 -->
+                <article class="reveal bg-white rounded-3xl overflow-hidden shadow-lg card-hover">
+                    <div class="relative overflow-hidden group">
+                        <img src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?w=800&q=80" alt="Article" class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110">
+                        <div class="absolute top-4 left-4 bg-emerald-600 text-white px-4 py-2 rounded-full text-sm font-semibold">
+                            PHYTOTHÉRAPIE
+                        </div>
+                    </div>
+                    <div class="p-8">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-4 hover:text-emerald-600 transition">
+                            Les plantes de la digestion
+                        </h3>
+                        <p class="text-gray-600 mb-6 leading-relaxed">
+                            Découvrez les vertus des plantes médicinales pour soulager naturellement les troubles digestifs et retrouver votre confort...
+                        </p>
+                        <a href="#" class="inline-flex items-center text-emerald-600 font-semibold hover:text-emerald-700 transition group">
+                            Lire l'article
+                            <i class="fas fa-arrow-right ml-2 group-hover:translate-x-2 transition-transform"></i>
+                        </a>
+                    </div>
+                </article>
+            </div>
+
+            <div class="text-center mt-16 reveal">
+                <a href="#" class="btn-primary inline-block bg-emerald-100 text-emerald-700 px-10 py-4 rounded-full font-semibold hover:bg-emerald-200 transition">
+                    Voir tous les articles
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-32 bg-gradient-to-b from-[#FAF5E4]/30 to-white relative overflow-hidden">
+        <div class="absolute bottom-0 right-0 w-96 h-96 bg-emerald-100 rounded-full filter blur-3xl opacity-20"></div>
+        <div class="container mx-auto px-6 lg:px-12 relative">
+            <div class="text-center mb-20 reveal">
+                <div class="inline-block bg-emerald-100 text-emerald-700 px-4 py-2 rounded-full text-sm font-semibold mb-6">
+                    CONTACT
+                </div>
+                <h2 class="text-5xl lg:text-6xl font-bold text-gray-900 mb-6">
+                    Prenons <span class="bg-gradient-to-r from-emerald-600 to-emerald-500 bg-clip-text text-transparent">contact</span>
+                </h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+                    Je serais ravie de vous accompagner dans votre démarche bien-être
+                </p>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
+                <!-- Form -->
+                <div class="reveal bg-white rounded-3xl shadow-2xl p-10 lg:p-12">
+                    <h3 class="text-3xl font-bold text-gray-900 mb-8">Envoyez-moi un message</h3>
+                    <form class="space-y-6" id="contactForm">
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-3">Nom complet *</label>
+                            <input type="text" required class="w-full px-6 py-4 border-2 border-gray-200 rounded-2xl transition-all duration-300" placeholder="Votre nom">
+                        </div>
+
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-3">Email *</label>
+                            <input type="email" required class="w-full px-6 py-4 border-2 border-gray-200 rounded-2xl transition-all duration-300" placeholder="votre@email.com">
+                        </div>
+
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-3">Téléphone</label>
+                            <input type="tel" class="w-full px-6 py-4 border-2 border-gray-200 rounded-2xl transition-all duration-300" placeholder="06 12 34 56 78">
+                        </div>
+
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-3">Sujet</label>
+                            <select class="w-full px-6 py-4 border-2 border-gray-200 rounded-2xl transition-all duration-300">
+                                <option>Consultation individuelle</option>
+                                <option>Programme nutrition</option>
+                                <option>Phytothérapie</option>
+                                <option>Autre question</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-3">Message *</label>
+                            <textarea required rows="5" class="w-full px-6 py-4 border-2 border-gray-200 rounded-2xl transition-all duration-300" placeholder="Parlez-moi de vos besoins..."></textarea>
+                        </div>
+
+                        <button type="submit" class="btn-primary w-full bg-gradient-to-r from-emerald-500 to-emerald-600 text-white py-5 rounded-2xl font-semibold text-lg shadow-lg">
+                            <i class="fas fa-paper-plane mr-2"></i>
+                            Envoyer le message
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Contact Info -->
+                <div class="space-y-8 reveal">
+                    <div class="bg-white rounded-3xl shadow-xl p-10">
+                        <h3 class="text-3xl font-bold text-gray-900 mb-8">Informations</h3>
+
+                        <div class="space-y-8">
+                            <div class="flex items-start gap-6">
+                                <div class="w-14 h-14 bg-gradient-to-br from-emerald-400 to-emerald-600 rounded-2xl flex items-center justify-center flex-shrink-0 shadow-lg">
+                                    <i class="fas fa-map-marker-alt text-white text-xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-gray-900 mb-2 text-lg">Adresse</h4>
+                                    <p class="text-gray-600 leading-relaxed">15 Avenue de la Santé<br>75014 Paris, France</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start gap-6">
+                                <div class="w-14 h-14 bg-gradient-to-br from-emerald-400 to-emerald-600 rounded-2xl flex items-center justify-center flex-shrink-0 shadow-lg">
+                                    <i class="fas fa-phone text-white text-xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-gray-900 mb-2 text-lg">Téléphone</h4>
+                                    <p class="text-gray-600">+33 6 12 34 56 78</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start gap-6">
+                                <div class="w-14 h-14 bg-gradient-to-br from-emerald-400 to-emerald-600 rounded-2xl flex items-center justify-center flex-shrink-0 shadow-lg">
+                                    <i class="fas fa-envelope text-white text-xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-gray-900 mb-2 text-lg">Email</h4>
+                                    <p class="text-gray-600">contact@naturovie.fr</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start gap-6">
+                                <div class="w-14 h-14 bg-gradient-to-br from-emerald-400 to-emerald-600 rounded-2xl flex items-center justify-center flex-shrink-0 shadow-lg">
+                                    <i class="fas fa-clock text-white text-xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-gray-900 mb-2 text-lg">Horaires</h4>
+                                    <p class="text-gray-600 leading-relaxed">
+                                        Lundi - Vendredi : 9h - 19h<br>
+                                        Samedi : 9h - 13h<br>
+                                        Dimanche : Fermé
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Social -->
+                    <div class="bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-3xl shadow-xl p-10 text-white">
+                        <h3 class="text-3xl font-bold mb-4">Suivez-moi</h3>
+                        <p class="mb-8 opacity-95 text-lg">Rejoignez ma communauté pour des conseils quotidiens</p>
+                        <div class="flex gap-4">
+                            <a href="#" class="w-14 h-14 bg-white/20 hover:bg-white/30 backdrop-blur-sm rounded-2xl flex items-center justify-center transition-all duration-300 hover:scale-110 shadow-lg">
+                                <i class="fab fa-facebook-f text-xl"></i>
+                            </a>
+                            <a href="#" class="w-14 h-14 bg-white/20 hover:bg-white/30 backdrop-blur-sm rounded-2xl flex items-center justify-center transition-all duration-300 hover:scale-110 shadow-lg">
+                                <i class="fab fa-instagram text-xl"></i>
+                            </a>
+                            <a href="#" class="w-14 h-14 bg-white/20 hover:bg-white/30 backdrop-blur-sm rounded-2xl flex items-center justify-center transition-all duration-300 hover:scale-110 shadow-lg">
+                                <i class="fab fa-linkedin-in text-xl"></i>
+                            </a>
+                            <a href="#" class="w-14 h-14 bg-white/20 hover:bg-white/30 backdrop-blur-sm rounded-2xl flex items-center justify-center transition-all duration-300 hover:scale-110 shadow-lg">
+                                <i class="fab fa-youtube text-xl"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- CTA Box -->
+                    <div class="bg-[#FAF5E4] border-2 border-emerald-200 rounded-3xl p-10">
+                        <div class="flex items-center gap-4 mb-4">
+                            <div class="w-12 h-12 bg-emerald-600 rounded-xl flex items-center justify-center">
+                                <i class="fas fa-gift text-white text-xl"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold text-gray-900">Offre découverte</h3>
+                        </div>
+                        <p class="text-gray-700 mb-6 leading-relaxed">Première consultation de 30 minutes offerte pour découvrir la naturopathie</p>
+                        <a href="#contact" class="btn-primary inline-block bg-gradient-to-r from-emerald-500 to-emerald-600 text-white px-8 py-4 rounded-full font-semibold shadow-lg">
+                            J'en profite →
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- DEMO Banner - Marketing Hook -->
+    <div class="fixed bottom-6 right-6 z-50 max-w-sm">
+        <div id="demoBanner" class="bg-gradient-to-br from-purple-600 via-pink-600 to-rose-600 rounded-3xl shadow-2xl p-6 transform transition-all duration-500 hover:scale-105">
+            <button onclick="document.getElementById('demoBanner').style.display='none'" class="absolute top-3 right-3 w-8 h-8 bg-white/20 hover:bg-white/30 rounded-full flex items-center justify-center transition">
+                <i class="fas fa-times text-white text-sm"></i>
+            </button>
+
+            <div class="flex items-start gap-4 mb-4">
+                <div class="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center flex-shrink-0 animate-pulse">
+                    <i class="fas fa-rocket text-white text-xl"></i>
+                </div>
+                <div>
+                    <div class="text-white font-bold text-lg mb-1">🎯 Site DÉMO</div>
+                    <div class="text-white/90 text-sm">Ceci est un exemple de ce que VOUS pourriez avoir !</div>
+                </div>
+            </div>
+
+            <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-4 mb-4 space-y-2">
+                <div class="flex items-center text-white text-sm">
+                    <i class="fas fa-check-circle text-green-300 mr-2"></i>
+                    Design moderne & responsive
+                </div>
+                <div class="flex items-center text-white text-sm">
+                    <i class="fas fa-check-circle text-green-300 mr-2"></i>
+                    Animations professionnelles
+                </div>
+                <div class="flex items-center text-white text-sm">
+                    <i class="fas fa-check-circle text-green-300 mr-2"></i>
+                    100% personnalisable
+                </div>
+            </div>
+
+            <button onclick="document.getElementById('demoModal').classList.remove('hidden')" class="w-full bg-white text-purple-600 py-3 rounded-full font-bold shadow-lg hover:shadow-xl transition transform hover:scale-105">
+                🚀 Je veux le mien !
+            </button>
+        </div>
+    </div>
+
+    <!-- Demo Modal - Conversion Powerhouse -->
+    <div id="demoModal" class="hidden fixed inset-0 z-[100] bg-black/80 backdrop-blur-sm flex items-center justify-center p-6 animate-fade-in">
+        <div class="bg-white rounded-3xl max-w-4xl w-full max-h-[90vh] overflow-y-auto relative">
+            <button onclick="document.getElementById('demoModal').classList.add('hidden')" class="absolute top-6 right-6 w-12 h-12 bg-gray-100 hover:bg-gray-200 rounded-full flex items-center justify-center transition z-10">
+                <i class="fas fa-times text-gray-600 text-xl"></i>
+            </button>
+
+            <!-- Header Impact -->
+            <div class="bg-gradient-to-br from-purple-600 via-pink-600 to-rose-600 text-white p-12 rounded-t-3xl relative overflow-hidden">
+                <div class="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full -mr-32 -mt-32"></div>
+                <div class="relative">
+                    <div class="inline-block bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full text-sm font-semibold mb-4">
+                        ✨ OFFRE SPÉCIALE LANCEMENT
+                    </div>
+                    <h2 class="text-4xl lg:text-5xl font-bold mb-4 leading-tight">
+                        Imaginez VOTRE Cabinet avec ce Site Pro 🎯
+                    </h2>
+                    <p class="text-xl opacity-95 leading-relaxed">
+                        Vous venez de voir ce qu'un site moderne peut faire pour votre activité. Et si c'était le VÔTRE ?
+                    </p>
+                </div>
+            </div>
+
+            <div class="p-8 lg:p-12 space-y-10">
+
+                <!-- ROI Calculator -->
+                <div class="bg-gradient-to-br from-emerald-50 to-teal-50 rounded-3xl p-8 border-2 border-emerald-200">
+                    <h3 class="text-3xl font-bold text-gray-900 mb-6 flex items-center">
+                        <span class="w-12 h-12 bg-emerald-600 rounded-xl flex items-center justify-center mr-4">
+                            <i class="fas fa-calculator text-white"></i>
+                        </span>
+                        Calculez votre ROI en 30 secondes
+                    </h3>
+
+                    <div class="grid md:grid-cols-2 gap-6 mb-6">
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-3">Prix de votre consultation</label>
+                            <input type="number" id="consultPrice" value="75" class="w-full px-6 py-4 border-2 border-gray-200 rounded-2xl text-lg font-semibold" onchange="calculateROI()">
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-3">Nouveaux clients/mois souhaités</label>
+                            <input type="number" id="clientsGoal" value="5" class="w-full px-6 py-4 border-2 border-gray-200 rounded-2xl text-lg font-semibold" onchange="calculateROI()">
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-2xl p-6 shadow-lg">
+                        <div class="grid md:grid-cols-3 gap-6 text-center">
+                            <div>
+                                <div class="text-gray-600 mb-2">CA mensuel potentiel</div>
+                                <div id="monthlyRevenue" class="text-4xl font-bold text-emerald-600">375€</div>
+                            </div>
+                            <div>
+                                <div class="text-gray-600 mb-2">CA annuel potentiel</div>
+                                <div id="yearlyRevenue" class="text-4xl font-bold text-emerald-600">4 500€</div>
+                            </div>
+                            <div>
+                                <div class="text-gray-600 mb-2">ROI sur 1 an</div>
+                                <div id="roi" class="text-4xl font-bold text-purple-600">300%</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <p class="text-center text-gray-600 mt-4 text-sm">
+                        💡 <strong>Avec juste 5 nouveaux clients/mois</strong>, votre site est rentabilisé en moins d'un mois !
+                    </p>
+                </div>
+
+                <!-- Avant/Après Comparaison -->
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="bg-gray-50 rounded-3xl p-8 border-2 border-gray-200">
+                        <div class="text-center mb-6">
+                            <div class="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-times text-red-600 text-2xl"></i>
+                            </div>
+                            <h4 class="text-2xl font-bold text-gray-900">Sans Site Pro</h4>
+                        </div>
+                        <ul class="space-y-4">
+                            <li class="flex items-start text-gray-700">
+                                <i class="fas fa-times-circle text-red-500 mr-3 mt-1"></i>
+                                <span>Clients trouvés par bouche-à-oreille uniquement</span>
+                            </li>
+                            <li class="flex items-start text-gray-700">
+                                <i class="fas fa-times-circle text-red-500 mr-3 mt-1"></i>
+                                <span>Difficulté à expliquer vos services</span>
+                            </li>
+                            <li class="flex items-start text-gray-700">
+                                <i class="fas fa-times-circle text-red-500 mr-3 mt-1"></i>
+                                <span>Image amateur vs. concurrence</span>
+                            </li>
+                            <li class="flex items-start text-gray-700">
+                                <i class="fas fa-times-circle text-red-500 mr-3 mt-1"></i>
+                                <span>Réservations par téléphone uniquement</span>
+                            </li>
+                            <li class="flex items-start text-gray-700">
+                                <i class="fas fa-times-circle text-red-500 mr-3 mt-1"></i>
+                                <span>Pas de présence Google</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-gradient-to-br from-emerald-50 to-teal-50 rounded-3xl p-8 border-2 border-emerald-300 relative overflow-hidden">
+                        <div class="absolute top-0 right-0 text-6xl opacity-10">🚀</div>
+                        <div class="text-center mb-6 relative">
+                            <div class="w-16 h-16 bg-emerald-600 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
+                                <i class="fas fa-check text-white text-2xl"></i>
+                            </div>
+                            <h4 class="text-2xl font-bold text-gray-900">Avec VOTRE Site</h4>
+                        </div>
+                        <ul class="space-y-4">
+                            <li class="flex items-start text-gray-900 font-medium">
+                                <i class="fas fa-check-circle text-emerald-600 mr-3 mt-1"></i>
+                                <span>Visible 24/7 sur Google</span>
+                            </li>
+                            <li class="flex items-start text-gray-900 font-medium">
+                                <i class="fas fa-check-circle text-emerald-600 mr-3 mt-1"></i>
+                                <span>Crédibilité & confiance instantanée</span>
+                            </li>
+                            <li class="flex items-start text-gray-900 font-medium">
+                                <i class="fas fa-check-circle text-emerald-600 mr-3 mt-1"></i>
+                                <span>Réservations en ligne automatiques</span>
+                            </li>
+                            <li class="flex items-start text-gray-900 font-medium">
+                                <i class="fas fa-check-circle text-emerald-600 mr-3 mt-1"></i>
+                                <span>Témoignages qui rassurent</span>
+                            </li>
+                            <li class="flex items-start text-gray-900 font-medium">
+                                <i class="fas fa-check-circle text-emerald-600 mr-3 mt-1"></i>
+                                <span>Flux régulier de nouveaux clients</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Statistiques Impact -->
+                <div class="bg-gradient-to-r from-purple-600 to-pink-600 rounded-3xl p-8 text-white">
+                    <h3 class="text-3xl font-bold mb-8 text-center">📊 Les chiffres qui parlent</h3>
+                    <div class="grid md:grid-cols-3 gap-6">
+                        <div class="text-center bg-white/10 backdrop-blur-sm rounded-2xl p-6">
+                            <div class="text-5xl font-bold mb-2">75%</div>
+                            <div class="text-white/90">des clients choisissent un praticien avec un site pro</div>
+                        </div>
+                        <div class="text-center bg-white/10 backdrop-blur-sm rounded-2xl p-6">
+                            <div class="text-5xl font-bold mb-2">3x</div>
+                            <div class="text-white/90">plus de réservations qu'avec réseaux sociaux seuls</div>
+                        </div>
+                        <div class="text-center bg-white/10 backdrop-blur-sm rounded-2xl p-6">
+                            <div class="text-5xl font-bold mb-2">24/7</div>
+                            <div class="text-white/90">votre meilleur commercial travaille pour vous</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Ce que vous obtenez -->
+                <div>
+                    <h3 class="text-3xl font-bold text-gray-900 mb-8 text-center">
+                        🎁 Ce que VOUS obtiendrez (comme cette démo)
+                    </h3>
+
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div class="flex items-start gap-4 bg-gray-50 rounded-2xl p-6">
+                            <div class="w-12 h-12 bg-emerald-600 rounded-xl flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-mobile-alt text-white text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-900 mb-2">Design 100% Responsive</h4>
+                                <p class="text-gray-600 text-sm">Parfait sur mobile, tablette et ordinateur</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4 bg-gray-50 rounded-2xl p-6">
+                            <div class="w-12 h-12 bg-emerald-600 rounded-xl flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-bolt text-white text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-900 mb-2">Ultra Rapide</h4>
+                                <p class="text-gray-600 text-sm">Chargement instantané = plus de conversions</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4 bg-gray-50 rounded-2xl p-6">
+                            <div class="w-12 h-12 bg-emerald-600 rounded-xl flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-search text-white text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-900 mb-2">SEO Optimisé</h4>
+                                <p class="text-gray-600 text-sm">Visible sur Google dès le lancement</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4 bg-gray-50 rounded-2xl p-6">
+                            <div class="w-12 h-12 bg-emerald-600 rounded-xl flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-palette text-white text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-900 mb-2">100% Personnalisable</h4>
+                                <p class="text-gray-600 text-sm">Vos couleurs, vos textes, vos photos</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4 bg-gray-50 rounded-2xl p-6">
+                            <div class="w-12 h-12 bg-emerald-600 rounded-xl flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-calendar-check text-white text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-900 mb-2">Réservation en Ligne</h4>
+                                <p class="text-gray-600 text-sm">Vos clients réservent 24/7 automatiquement</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4 bg-gray-50 rounded-2xl p-6">
+                            <div class="w-12 h-12 bg-emerald-600 rounded-xl flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-shield-alt text-white text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-900 mb-2">Sécurisé & Fiable</h4>
+                                <p class="text-gray-600 text-sm">SSL, RGPD, hébergement premium</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Urgence & Offre -->
+                <div class="bg-gradient-to-br from-yellow-50 to-orange-50 border-2 border-orange-300 rounded-3xl p-8">
+                    <div class="text-center mb-6">
+                        <div class="inline-block bg-orange-600 text-white px-6 py-3 rounded-full font-bold text-lg mb-4 animate-pulse">
+                            🔥 OFFRE LIMITÉE - 3 PLACES RESTANTES
+                        </div>
+                        <h3 class="text-3xl font-bold text-gray-900 mb-4">
+                            Tarif Lancement Exceptionnel
+                        </h3>
+                    </div>
+
+                    <div class="bg-white rounded-2xl p-8 mb-6 text-center">
+                        <div class="text-gray-500 line-through text-2xl mb-2">Prix normal : 2 500€</div>
+                        <div class="text-6xl font-bold text-orange-600 mb-4">990€</div>
+                        <div class="text-gray-700 text-lg">
+                            <strong>Paiement en 3x sans frais : 330€/mois</strong>
+                        </div>
+                        <div class="inline-block bg-green-100 text-green-800 px-4 py-2 rounded-full text-sm font-semibold mt-4">
+                            Économisez 1 510€ 💰
+                        </div>
+                    </div>
+
+                    <div class="text-center space-y-3 text-gray-700">
+                        <p class="flex items-center justify-center">
+                            <i class="fas fa-check-circle text-green-600 mr-2"></i>
+                            Livraison en 7 jours
+                        </p>
+                        <p class="flex items-center justify-center">
+                            <i class="fas fa-check-circle text-green-600 mr-2"></i>
+                            Modifications illimitées pendant 30 jours
+                        </p>
+                        <p class="flex items-center justify-center">
+                            <i class="fas fa-check-circle text-green-600 mr-2"></i>
+                            Support prioritaire 6 mois
+                        </p>
+                    </div>
+                </div>
+
+                <!-- CTA Final -->
+                <div class="text-center space-y-6">
+                    <a href="#contact" onclick="document.getElementById('demoModal').classList.add('hidden')" class="inline-block bg-gradient-to-r from-purple-600 to-pink-600 text-white px-12 py-6 rounded-full font-bold text-xl shadow-2xl hover:scale-105 transition-transform">
+                        🚀 Oui, je veux mon site maintenant !
+                    </a>
+
+                    <p class="text-gray-600">
+                        ⚡ <strong>Réponse sous 24h</strong> · 💳 Paiement sécurisé · 😊 Satisfaction garantie
+                    </p>
+
+                    <div class="flex items-center justify-center gap-8 text-sm text-gray-500 pt-4">
+                        <div class="flex items-center">
+                            <i class="fas fa-star text-yellow-400 mr-1"></i>
+                            <i class="fas fa-star text-yellow-400 mr-1"></i>
+                            <i class="fas fa-star text-yellow-400 mr-1"></i>
+                            <i class="fas fa-star text-yellow-400 mr-1"></i>
+                            <i class="fas fa-star text-yellow-400 mr-2"></i>
+                            4.9/5 (127 avis)
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-users text-emerald-600 mr-2"></i>
+                            +450 praticiens équipés
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="fixed bottom-6 right-6 z-50 max-w-sm">
+        <div id="demoBanner" class="bg-gradient-to-br from-purple-600 via-pink-600 to-rose-600 rounded-3xl shadow-2xl p-6 transform transition-all duration-500 hover:scale-105">
+            <button onclick="document.getElementById('demoBanner').style.display='none'" class="absolute top-3 right-3 w-8 h-8 bg-white/20 hover:bg-white/30 rounded-full flex items-center justify-center transition">
+                <i class="fas fa-times text-white text-sm"></i>
+            </button>
+
+            <div class="flex items-start gap-4 mb-4">
+                <div class="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center flex-shrink-0 animate-pulse">
+                    <i class="fas fa-rocket text-white text-xl"></i>
+                </div>
+                <div>
+                    <div class="text-white font-bold text-lg mb-1">🎯 Site DÉMO</div>
+                    <div class="text-white/90 text-sm">Ceci est un exemple de ce que VOUS pourriez avoir !</div>
+                </div>
+            </div>
+
+            <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-4 mb-4 space-y-2">
+                <div class="flex items-center text-white text-sm">
+                    <i class="fas fa-check-circle text-green-300 mr-2"></i>
+                    Design moderne & responsive
+                </div>
+                <div class="flex items-center text-white text-sm">
+                    <i class="fas fa-check-circle text-green-300 mr-2"></i>
+                    Animations professionnelles
+                </div>
+                <div class="flex items-center text-white text-sm">
+                    <i class="fas fa-check-circle text-green-300 mr-2"></i>
+                    100% personnalisable
+                </div>
+            </div>
+
+            <button onclick="document.getElementById('demoModal').classList.remove('hidden')" class="w-full bg-white text-purple-600 py-3 rounded-full font-bold shadow-lg hover:shadow-xl transition transform hover:scale-105">
+                🚀 Je veux le mien !
+            </button>
+        </div>
+    </div>
+
+    <!-- Demo Modal - Conversion Powerhouse -->
+    <div id="demoModal" class="hidden fixed inset-0 z-[100] bg-black/80 backdrop-blur-sm flex items-center justify-center p-6 animate-fade-in">
+        <div class="bg-white rounded-3xl max-w-4xl w-full max-h-[90vh] overflow-y-auto relative">
+            <button onclick="document.getElementById('demoModal').classList.add('hidden')" class="absolute top-6 right-6 w-12 h-12 bg-gray-100 hover:bg-gray-200 rounded-full flex items-center justify-center transition z-10">
+                <i class="fas fa-times text-gray-600 text-xl"></i>
+            </button>
+
+            <!-- Header Impact -->
+            <div class="bg-gradient-to-br from-purple-600 via-pink-600 to-rose-600 text-white p-12 rounded-t-3xl relative overflow-hidden">
+                <div class="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full -mr-32 -mt-32"></div>
+                <div class="relative">
+                    <div class="inline-block bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full text-sm font-semibold mb-4">
+                        ✨ OFFRE SPÉCIALE LANCEMENT
+                    </div>
+                    <h2 class="text-4xl lg:text-5xl font-bold mb-4 leading-tight">
+                        Imaginez VOTRE Cabinet avec ce Site Pro 🎯
+                    </h2>
+                    <p class="text-xl opacity-95 leading-relaxed">
+                        Vous venez de voir ce qu'un site moderne peut faire pour votre activité. Et si c'était le VÔTRE ?
+                    </p>
+                </div>
+            </div>
+
+            <div class="p-8 lg:p-12 space-y-10">
+
+                <!-- ROI Calculator -->
+                <div class="bg-gradient-to-br from-emerald-50 to-teal-50 rounded-3xl p-8 border-2 border-emerald-200">
+                    <h3 class="text-3xl font-bold text-gray-900 mb-6 flex items-center">
+                        <span class="w-12 h-12 bg-emerald-600 rounded-xl flex items-center justify-center mr-4">
+                            <i class="fas fa-calculator text-white"></i>
+                        </span>
+                        Calculez votre ROI en 30 secondes
+                    </h3>
+
+                    <div class="grid md:grid-cols-2 gap-6 mb-6">
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-3">Prix de votre consultation</label>
+                            <input type="number" id="consultPrice" value="75" class="w-full px-6 py-4 border-2 border-gray-200 rounded-2xl text-lg font-semibold" onchange="calculateROI()">
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-3">Nouveaux clients/mois souhaités</label>
+                            <input type="number" id="clientsGoal" value="5" class="w-full px-6 py-4 border-2 border-gray-200 rounded-2xl text-lg font-semibold" onchange="calculateROI()">
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-2xl p-6 shadow-lg">
+                        <div class="grid md:grid-cols-3 gap-6 text-center">
+                            <div>
+                                <div class="text-gray-600 mb-2">CA mensuel potentiel</div>
+                                <div id="monthlyRevenue" class="text-4xl font-bold text-emerald-600">375€</div>
+                            </div>
+                            <div>
+                                <div class="text-gray-600 mb-2">CA annuel potentiel</div>
+                                <div id="yearlyRevenue" class="text-4xl font-bold text-emerald-600">4 500€</div>
+                            </div>
+                            <div>
+                                <div class="text-gray-600 mb-2">ROI sur 1 an</div>
+                                <div id="roi" class="text-4xl font-bold text-purple-600">300%</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <p class="text-center text-gray-600 mt-4 text-sm">
+                        💡 <strong>Avec juste 5 nouveaux clients/mois</strong>, votre site est rentabilisé en moins d'un mois !
+                    </p>
+                </div>
+
+                <!-- Avant/Après Comparaison -->
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="bg-gray-50 rounded-3xl p-8 border-2 border-gray-200">
+                        <div class="text-center mb-6">
+                            <div class="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-times text-red-600 text-2xl"></i>
+                            </div>
+                            <h4 class="text-2xl font-bold text-gray-900">Sans Site Pro</h4>
+                        </div>
+                        <ul class="space-y-4">
+                            <li class="flex items-start text-gray-700">
+                                <i class="fas fa-times-circle text-red-500 mr-3 mt-1"></i>
+                                <span>Clients trouvés par bouche-à-oreille uniquement</span>
+                            </li>
+                            <li class="flex items-start text-gray-700">
+                                <i class="fas fa-times-circle text-red-500 mr-3 mt-1"></i>
+                                <span>Difficulté à expliquer vos services</span>
+                            </li>
+                            <li class="flex items-start text-gray-700">
+                                <i class="fas fa-times-circle text-red-500 mr-3 mt-1"></i>
+                                <span>Image amateur vs. concurrence</span>
+                            </li>
+                            <li class="flex items-start text-gray-700">
+                                <i class="fas fa-times-circle text-red-500 mr-3 mt-1"></i>
+                                <span>Réservations par téléphone uniquement</span>
+                            </li>
+                            <li class="flex items-start text-gray-700">
+                                <i class="fas fa-times-circle text-red-500 mr-3 mt-1"></i>
+                                <span>Pas de présence Google</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-gradient-to-br from-emerald-50 to-teal-50 rounded-3xl p-8 border-2 border-emerald-300 relative overflow-hidden">
+                        <div class="absolute top-0 right-0 text-6xl opacity-10">🚀</div>
+                        <div class="text-center mb-6 relative">
+                            <div class="w-16 h-16 bg-emerald-600 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
+                                <i class="fas fa-check text-white text-2xl"></i>
+                            </div>
+                            <h4 class="text-2xl font-bold text-gray-900">Avec VOTRE Site</h4>
+                        </div>
+                        <ul class="space-y-4">
+                            <li class="flex items-start text-gray-900 font-medium">
+                                <i class="fas fa-check-circle text-emerald-600 mr-3 mt-1"></i>
+                                <span>Visible 24/7 sur Google</span>
+                            </li>
+                            <li class="flex items-start text-gray-900 font-medium">
+                                <i class="fas fa-check-circle text-emerald-600 mr-3 mt-1"></i>
+                                <span>Crédibilité & confiance instantanée</span>
+                            </li>
+                            <li class="flex items-start text-gray-900 font-medium">
+                                <i class="fas fa-check-circle text-emerald-600 mr-3 mt-1"></i>
+                                <span>Réservations en ligne automatiques</span>
+                            </li>
+                            <li class="flex items-start text-gray-900 font-medium">
+                                <i class="fas fa-check-circle text-emerald-600 mr-3 mt-1"></i>
+                                <span>Témoignages qui rassurent</span>
+                            </li>
+                            <li class="flex items-start text-gray-900 font-medium">
+                                <i class="fas fa-check-circle text-emerald-600 mr-3 mt-1"></i>
+                                <span>Flux régulier de nouveaux clients</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Statistiques Impact -->
+                <div class="bg-gradient-to-r from-purple-600 to-pink-600 rounded-3xl p-8 text-white">
+                    <h3 class="text-3xl font-bold mb-8 text-center">📊 Les chiffres qui parlent</h3>
+                    <div class="grid md:grid-cols-3 gap-6">
+                        <div class="text-center bg-white/10 backdrop-blur-sm rounded-2xl p-6">
+                            <div class="text-5xl font-bold mb-2">75%</div>
+                            <div class="text-white/90">des clients choisissent un praticien avec un site pro</div>
+                        </div>
+                        <div class="text-center bg-white/10 backdrop-blur-sm rounded-2xl p-6">
+                            <div class="text-5xl font-bold mb-2">3x</div>
+                            <div class="text-white/90">plus de réservations qu'avec réseaux sociaux seuls</div>
+                        </div>
+                        <div class="text-center bg-white/10 backdrop-blur-sm rounded-2xl p-6">
+                            <div class="text-5xl font-bold mb-2">24/7</div>
+                            <div class="text-white/90">votre meilleur commercial travaille pour vous</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Ce que vous obtenez -->
+                <div>
+                    <h3 class="text-3xl font-bold text-gray-900 mb-8 text-center">
+                        🎁 Ce que VOUS obtiendrez (comme cette démo)
+                    </h3>
+
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div class="flex items-start gap-4 bg-gray-50 rounded-2xl p-6">
+                            <div class="w-12 h-12 bg-emerald-600 rounded-xl flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-mobile-alt text-white text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-900 mb-2">Design 100% Responsive</h4>
+                                <p class="text-gray-600 text-sm">Parfait sur mobile, tablette et ordinateur</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4 bg-gray-50 rounded-2xl p-6">
+                            <div class="w-12 h-12 bg-emerald-600 rounded-xl flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-bolt text-white text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-900 mb-2">Ultra Rapide</h4>
+                                <p class="text-gray-600 text-sm">Chargement instantané = plus de conversions</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4 bg-gray-50 rounded-2xl p-6">
+                            <div class="w-12 h-12 bg-emerald-600 rounded-xl flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-search text-white text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-900 mb-2">SEO Optimisé</h4>
+                                <p class="text-gray-600 text-sm">Visible sur Google dès le lancement</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4 bg-gray-50 rounded-2xl p-6">
+                            <div class="w-12 h-12 bg-emerald-600 rounded-xl flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-palette text-white text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-900 mb-2">100% Personnalisable</h4>
+                                <p class="text-gray-600 text-sm">Vos couleurs, vos textes, vos photos</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4 bg-gray-50 rounded-2xl p-6">
+                            <div class="w-12 h-12 bg-emerald-600 rounded-xl flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-calendar-check text-white text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-900 mb-2">Réservation en Ligne</h4>
+                                <p class="text-gray-600 text-sm">Vos clients réservent 24/7 automatiquement</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4 bg-gray-50 rounded-2xl p-6">
+                            <div class="w-12 h-12 bg-emerald-600 rounded-xl flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-shield-alt text-white text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-900 mb-2">Sécurisé & Fiable</h4>
+                                <p class="text-gray-600 text-sm">SSL, RGPD, hébergement premium</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Urgence & Offre -->
+                <div class="bg-gradient-to-br from-yellow-50 to-orange-50 border-2 border-orange-300 rounded-3xl p-8">
+                    <div class="text-center mb-6">
+                        <div class="inline-block bg-orange-600 text-white px-6 py-3 rounded-full font-bold text-lg mb-4 animate-pulse">
+                            🔥 OFFRE LIMITÉE - 3 PLACES RESTANTES
+                        </div>
+                        <h3 class="text-3xl font-bold text-gray-900 mb-4">
+                            Tarif Lancement Exceptionnel
+                        </h3>
+                    </div>
+
+                    <div class="bg-white rounded-2xl p-8 mb-6 text-center">
+                        <div class="text-gray-500 line-through text-2xl mb-2">Prix normal : 2 500€</div>
+                        <div class="text-6xl font-bold text-orange-600 mb-4">990€</div>
+                        <div class="text-gray-700 text-lg">
+                            <strong>Paiement en 3x sans frais : 330€/mois</strong>
+                        </div>
+                        <div class="inline-block bg-green-100 text-green-800 px-4 py-2 rounded-full text-sm font-semibold mt-4">
+                            Économisez 1 510€ 💰
+                        </div>
+                    </div>
+
+                    <div class="text-center space-y-3 text-gray-700">
+                        <p class="flex items-center justify-center">
+                            <i class="fas fa-check-circle text-green-600 mr-2"></i>
+                            Livraison en 7 jours
+                        </p>
+                        <p class="flex items-center justify-center">
+                            <i class="fas fa-check-circle text-green-600 mr-2"></i>
+                            Modifications illimitées pendant 30 jours
+                        </p>
+                        <p class="flex items-center justify-center">
+                            <i class="fas fa-check-circle text-green-600 mr-2"></i>
+                            Support prioritaire 6 mois
+                        </p>
+                    </div>
+                </div>
+
+                <!-- CTA Final -->
+                <div class="text-center space-y-6">
+                    <a href="#contact" onclick="document.getElementById('demoModal').classList.add('hidden')" class="inline-block bg-gradient-to-r from-purple-600 to-pink-600 text-white px-12 py-6 rounded-full font-bold text-xl shadow-2xl hover:scale-105 transition-transform">
+                        🚀 Oui, je veux mon site maintenant !
+                    </a>
+
+                    <p class="text-gray-600">
+                        ⚡ <strong>Réponse sous 24h</strong> · 💳 Paiement sécurisé · 😊 Satisfaction garantie
+                    </p>
+
+                    <div class="flex items-center justify-center gap-8 text-sm text-gray-500 pt-4">
+                        <div class="flex items-center">
+                            <i class="fas fa-star text-yellow-400 mr-1"></i>
+                            <i class="fas fa-star text-yellow-400 mr-1"></i>
+                            <i class="fas fa-star text-yellow-400 mr-1"></i>
+                            <i class="fas fa-star text-yellow-400 mr-1"></i>
+                            <i class="fas fa-star text-yellow-400 mr-2"></i>
+                            4.9/5 (127 avis)
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-users text-emerald-600 mr-2"></i>
+                            +450 praticiens équipés
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-16">
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-16">
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-16">
+        <div class="container mx-auto px-6 lg:px-12">
+            <div class="grid md:grid-cols-4 gap-12 mb-12">
+                <div>
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="w-12 h-12 bg-gradient-to-br from-emerald-400 to-emerald-600 rounded-2xl flex items-center justify-center">
+                            <i class="fas fa-leaf text-white text-xl"></i>
+                        </div>
+                        <span class="text-2xl font-bold">NaturoVie</span>
+                    </div>
+                    <p class="text-gray-400 leading-relaxed">
+                        Votre partenaire santé pour un bien-être naturel et durable.
+                    </p>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-lg mb-6">Navigation</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#accueil" class="text-gray-400 hover:text-emerald-400 transition">Accueil</a></li>
+                        <li><a href="#apropos" class="text-gray-400 hover:text-emerald-400 transition">À propos</a></li>
+                        <li><a href="#services" class="text-gray-400 hover:text-emerald-400 transition">Services</a></li>
+                        <li><a href="#blog" class="text-gray-400 hover:text-emerald-400 transition">Blog</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-lg mb-6">Légal</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-gray-400 hover:text-emerald-400 transition">Mentions légales</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-emerald-400 transition">Confidentialité</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-emerald-400 transition">CGV</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-emerald-400 transition">Cookies</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-lg mb-6">Newsletter</h4>
+                    <p class="text-gray-400 mb-4 leading-relaxed">Conseils santé hebdomadaires</p>
+                    <form class="flex gap-2">
+                        <input type="email" placeholder="Votre email" class="flex-1 px-4 py-3 rounded-xl bg-gray-800 border border-gray-700 text-white focus:outline-none focus:border-emerald-500 transition">
+                        <button type="submit" class="bg-gradient-to-r from-emerald-500 to-emerald-600 px-5 py-3 rounded-xl hover:scale-105 transition shadow-lg">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-800 pt-8 text-center text-gray-400">
+                <p class="mb-2">&copy; 2025 NaturoVie - Sophie Martin. Tous droits réservés.</p>
+                <p class="text-sm">SIRET : 123 456 789 00012 | Certifiée FENA</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Mobile Menu
+        const menuBtn = document.getElementById('menuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Hero Slider
+        let slideIndex = 0;
+        const slides = document.querySelectorAll('.slide');
+        const dots = document.querySelectorAll('.dot');
+
+        function showSlide(n) {
+            slides.forEach(s => s.classList.remove('active'));
+            dots.forEach(d => {
+                d.classList.remove('bg-white');
+                d.classList.add('bg-white/50');
+            });
+
+            if (n >= slides.length) slideIndex = 0;
+            if (n < 0) slideIndex = slides.length - 1;
+
+            slides[slideIndex].classList.add('active');
+            dots[slideIndex].classList.add('bg-white');
+            dots[slideIndex].classList.remove('bg-white/50');
+        }
+
+        function changeSlide(n) {
+            slideIndex += n;
+            showSlide(slideIndex);
+        }
+
+        function currentSlide(n) {
+            slideIndex = n;
+            showSlide(slideIndex);
+        }
+
+        setInterval(() => {
+            slideIndex++;
+            showSlide(slideIndex);
+        }, 6000);
+
+        showSlide(slideIndex);
+
+        // Testimonial Slider
+        let testimonialIndex = 0;
+        const testimonialSlides = document.querySelectorAll('.testimonial-slide');
+        const testimonialDots = document.querySelectorAll('.testimonial-dot');
+
+        function showTestimonial(n) {
+            testimonialSlides.forEach(s => s.classList.remove('active'));
+            testimonialDots.forEach(d => {
+                d.classList.remove('bg-emerald-600');
+                d.classList.add('bg-gray-300');
+            });
+
+            if (n >= testimonialSlides.length) testimonialIndex = 0;
+            if (n < 0) testimonialIndex = testimonialSlides.length - 1;
+
+            testimonialSlides[testimonialIndex].classList.add('active');
+            testimonialDots[testimonialIndex].classList.add('bg-emerald-600');
+            testimonialDots[testimonialIndex].classList.remove('bg-gray-300');
+        }
+
+        function changeTestimonial(n) {
+            testimonialIndex += n;
+            showTestimonial(testimonialIndex);
+        }
+
+        function currentTestimonial(n) {
+            testimonialIndex = n;
+            showTestimonial(testimonialIndex);
+        }
+
+        setInterval(() => {
+            testimonialIndex++;
+            showTestimonial(testimonialIndex);
+        }, 8000);
+
+        showTestimonial(testimonialIndex);
+
+        // Smooth Scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const navHeight = document.getElementById('header').offsetHeight;
+                    const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - navHeight;
+
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                    mobileMenu.classList.add('hidden');
+                }
+            });
+        });
+
+        // Header Scroll Effect
+        const header = document.getElementById('header');
+        let lastScroll = 0;
+
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+
+            if (currentScroll > 100) {
+                header.style.padding = '1rem 0';
+                header.style.boxShadow = '0 4px 20px rgba(0,0,0,0.08)';
+            } else {
+                header.style.padding = '1.25rem 0';
+                header.style.boxShadow = '0 1px 3px rgba(0,0,0,0.05)';
+            }
+
+            lastScroll = currentScroll;
+        });
+
+        // Parallax Effect
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const parallaxElements = document.querySelectorAll('.hero-parallax');
+
+            parallaxElements.forEach(element => {
+                const speed = element.dataset.speed || 0.5;
+                element.style.transform = `translateY(${scrolled * speed}px)`;
+            });
+        });
+
+        // Scroll Reveal Animation
+        const revealElements = document.querySelectorAll('.reveal');
+
+        const revealOnScroll = () => {
+            const windowHeight = window.innerHeight;
+            const revealPoint = 100;
+
+            revealElements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+
+                if (elementTop < windowHeight - revealPoint) {
+                    element.classList.add('active');
+                }
+            });
+        };
+
+        window.addEventListener('scroll', revealOnScroll);
+        revealOnScroll();
+
+        // Contact Form
+        document.getElementById('contactForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            // Success animation
+            const button = e.target.querySelector('button[type="submit"]');
+            const originalText = button.innerHTML;
+            button.innerHTML = '<i class="fas fa-check mr-2"></i>Message envoyé !';
+            button.classList.add('bg-green-600');
+
+            setTimeout(() => {
+                button.innerHTML = originalText;
+                button.classList.remove('bg-green-600');
+                e.target.reset();
+            }, 3000);
+        });
+
+        // Add hover effect to cards
+        const cards = document.querySelectorAll('.card-hover');
+        cards.forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.zIndex = '10';
+            });
+            card.addEventListener('mouseleave', function() {
+                this.style.zIndex = '1';
+            });
+        });
+
+        // Add loading animation
+        window.addEventListener('load', () => {
+            document.body.style.opacity = '0';
+            setTimeout(() => {
+                document.body.style.transition = 'opacity 0.5s ease';
+                document.body.style.opacity = '1';
+            }, 100);
+        });
+
+        // Intersection Observer for better performance
+        if ('IntersectionObserver' in window) {
+            const observerOptions = {
+                threshold: 0.15,
+                rootMargin: '0px 0px -100px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            revealElements.forEach(element => {
+                observer.observe(element);
+            });
+        }
+
+        // Add micro-interactions to buttons
+        document.querySelectorAll('.btn-primary').forEach(btn => {
+            btn.addEventListener('mouseenter', function() {
+                this.style.transform = 'scale(1.05) translateY(-2px)';
+            });
+            btn.addEventListener('mouseleave', function() {
+                this.style.transform = 'scale(1) translateY(0)';
+            });
+        });
+
+        // Preload images for smoother slider transitions
+        const preloadImages = () => {
+            const images = [
+                'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=1920&q=80',
+                'https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=1920&q=80',
+                'https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=1920&q=80'
+            ];
+
+            images.forEach(src => {
+                const img = new Image();
+                img.src = src;
+            });
+        };
+
+        preloadImages();
+
+        // Initialize calculator
+        calculateROI();
+
+        // Live Notifications Simulation
+        const notifications = [
+            { icon: '👤', name: 'Marie D.', action: 'a réservé une consultation', time: 'Il y a 3 min' },
+            { icon: '⭐', name: 'Thomas B.', action: 'a laissé un avis 5★', time: 'Il y a 8 min' },
+            { icon: '📅', name: 'Sophie L.', action: 'a réservé le programme nutrition', time: 'Il y a 12 min' },
+            { icon: '💬', name: 'Julie M.', action: 'a envoyé un message', time: 'Il y a 15 min' },
+            { icon: '🎯', name: 'Pierre R.', action: 'visite votre site', time: 'Maintenant' }
+        ];
+
+        let notifIndex = 0;
+
+        function showNotification() {
+            const notif = notifications[notifIndex];
+            const container = document.getElementById('liveNotifications');
+
+            const notifEl = document.createElement('div');
+            notifEl.className = 'bg-white rounded-2xl shadow-2xl p-4 flex items-center gap-3 transform transition-all duration-500 hover:scale-105 cursor-pointer';
+            notifEl.style.animation = 'slideInLeft 0.5s ease-out';
+            notifEl.innerHTML = container.appendChild(notifEl);
+
+            // Remove after 5 seconds
+            setTimeout(() => {
+                notifEl.style.animation = 'slideOutLeft 0.5s ease-out';
+                setTimeout(() => notifEl.remove(), 500);
+            }, 5000);
+
+            notifIndex = (notifIndex + 1) % notifications.length;
+        }
+
+        // Show first notification after 5 seconds, then every 10 seconds
+        setTimeout(() => {
+            showNotification();
+            setInterval(showNotification, 10000);
+        }, 5000);
+
+        // Animate visitor/booking counts
+        let visitors = 1247;
+        let bookings = 47;
+
+        setInterval(() => {
+            visitors += Math.floor(Math.random() * 3);
+            document.getElementById('visitorCount').textContent = visitors.toLocaleString('fr-FR');
+
+            if (Math.random() > 0.7) {
+                bookings += 1;
+                document.getElementById('bookingCount').textContent = bookings;
+
+                // Flash effect
+                const bookingEl = document.getElementById('bookingCount');
+                bookingEl.style.transform = 'scale(1.3)';
+                bookingEl.style.color = '#10B981';
+                setTimeout(() => {
+                    bookingEl.style.transform = 'scale(1)';
+                    bookingEl.style.color = '';
+                }, 300);
+            }
+        }, 8000);
+
+        // Add slideOut animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideOutLeft {
+                from {
+                    opacity: 1;
+                    transform: translateX(0);
+                }
+                to {
+                    opacity: 0;
+                    transform: translateX(-100%);
+                }
+            }
+        `;
+    </script>
+
+          <!-- DEMO Banner - Marketing Hook -->
